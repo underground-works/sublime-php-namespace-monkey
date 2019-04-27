@@ -1,0 +1,10 @@
+{
+    // Namespace style
+    // - same-line - Same line as PHP tag
+    // - next-line - Next line after PHP tag
+    // - psr-2 - One blank line after PHP tag (PSR-2)
+    "namespace_style": "psr-2",
+
+    // Include class definition
+    "include_class_definition": true
+}
