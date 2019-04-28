@@ -1,7 +1,5 @@
 import json, os, re, sublime, sublime_plugin, time
 
-monkey = PhpNamespaceMonkey()
-
 class PhpNamespaceMonkey():
     namespaces = {}
 
@@ -98,3 +96,5 @@ class PhpNamespaceMonkeyReloadNamespacesCommand(sublime_plugin.TextCommand):
 
     def description(self):
         return "PHP Namespace Monkey: Reload namespaces"
+
+monkey = PhpNamespaceMonkey()
