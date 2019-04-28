@@ -6,7 +6,7 @@ The namespace monkey pre-fills all created PHP files in a Composer-enabled proje
 
 *You can save literally seconds every day thanks to this package.*
 
-![atom-php-namespace-monkey](https://user-images.githubusercontent.com/821582/31397288-e533da76-ade5-11e7-80c5-14e36d5cecf9.gif)
+![sublime-php-namespace-monkey](https://user-images.githubusercontent.com/821582/56864048-37a87380-69be-11e9-9c94-4e54334ed39f.gif)
 
 Set up the namespace declaration style and turn the class definitions on and off in the package settings.
 
