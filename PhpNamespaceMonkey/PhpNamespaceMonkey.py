@@ -1,11 +1,9 @@
 import json, os, re, sublime, sublime_plugin, time
 
-class PhpNamespaceMonkey(sublime_plugin.EventListener):
-    namespaces = {}
+monkey = PhpNamespaceMonkey()
 
-    def on_activated_async(self, view):
-        self.loadNamespaces(view)
-        self.addBoilerplate(view)
+class PhpNamespaceMonkey():
+    namespaces = {}
 
     def addBoilerplate(self, view):
         settings = sublime.load_settings('PhpNamespaceMonkey.sublime-settings')
@@ -31,11 +29,11 @@ class PhpNamespaceMonkey(sublime_plugin.EventListener):
         if settings.get('include_class_definition'):
             view.run_command('append', { 'characters': '\nclass {}\n{{\n}}\n'.format(className) })
 
-    def loadNamespaces(self, view):
+    def loadNamespaces(self, view, force = False):
         if not view.window(): return
 
         for path in view.window().folders():
-            if path in self.namespaces: continue
+            if path in self.namespaces and not force: continue
 
             self.namespaces[path] = namespaces = []
 
@@ -84,3 +82,19 @@ class PhpNamespaceMonkey(sublime_plugin.EventListener):
 
     def resolveClassName(self, path):
         return path.replace('.php', '').split('/')[-1]
+
+class PhpNamespaceMonkeyListener(sublime_plugin.EventListener):
+    def on_activated_async(self, view):
+        global monkey
+
+        monkey.loadNamespaces(view)
+        monkey.addBoilerplate(view)
+
+class PhpNamespaceMonkeyReloadNamespacesCommand(sublime_plugin.TextCommand):
+    def run(self, edit):
+        global monkey
+
+        monkey.loadNamespaces(self.view, True)
+
+    def description(self):
+        return "PHP Namespace Monkey: Reload namespaces"
