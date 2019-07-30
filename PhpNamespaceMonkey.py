@@ -12,6 +12,7 @@ class PhpNamespaceMonkey():
 
         namespace = self.resolveNamespace(view.file_name())
         className = self.resolveClassName(view.file_name())
+        type = self.resolveType(className)
 
         if not namespace: return
 
@@ -25,7 +26,7 @@ class PhpNamespaceMonkey():
             view.run_command('append', { 'characters': '<?php\n\nnamespace {};\n'.format(namespace) })
 
         if settings.get('include_class_definition'):
-            view.run_command('append', { 'characters': '\nclass {}\n{{\n}}\n'.format(className) })
+            view.run_command('append', { 'characters': '\n{} {}\n{{\n}}\n'.format(type, className) })
 
     def loadNamespaces(self, view, force = False):
         if not view.window(): return
@@ -80,6 +81,15 @@ class PhpNamespaceMonkey():
 
     def resolveClassName(self, path):
         return path.replace('.php', '').split('/')[-1]
+
+    def resolveType(self, className):
+        matches = re.search('(Interface|Trait|Abstract)$', className)
+
+        type = matches.group(1).lower() if matches else 'class'
+
+        if type == 'abstract': type += ' class'
+
+        return type
 
 class PhpNamespaceMonkeyListener(sublime_plugin.EventListener):
     def on_activated_async(self, view):
