@@ -71,7 +71,7 @@ class PhpNamespaceMonkey():
 
         if not namespaces: return
 
-        namespace = [namespace for namespace in namespaces if path.startswith(namespace['path'])][0]
+        namespace = next(filter(lambda namespace: path.startswith(namespace['path']), namespaces), None)
 
         if not namespace: return
 
