@@ -1,0 +1,31 @@
+[
+	{
+		"id": "preferences",
+		"children": [
+			{
+				"id": "package-settings",
+				"children": [
+					{
+						"caption": "PHP Namespace Monkey",
+						"children": [
+							{
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/PhpNamespaceMonkey/PhpNamespaceMonkey.sublime-settings"
+								},
+								"caption": "Settings – Default"
+							},
+							{
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/User/PhpNamespaceMonkey.sublime-settings"
+								},
+								"caption": "Settings – User"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

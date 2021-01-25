@@ -18,12 +18,17 @@ class PhpNamespaceMonkey():
 
         namespaceStyle = settings.get('namespace_style')
 
+        declarations = 'declare(strict_types=1);' if settings.get('declare_strict_types') else None
+        namespace = 'namespace {};'.format(namespace)
+
+        boilerplate = list(filter(None, [ '<?php', declarations, namespace ]))
+
         if namespaceStyle == 'same-line':
-            view.run_command('append', { 'characters': '<?php namespace {};\n'.format(namespace) })
+            view.run_command('append', { 'characters': ' '.join(boilerplate) + '\n' })
         elif namespaceStyle == 'next-line':
-            view.run_command('append', { 'characters': '<?php\nnamespace {};\n'.format(namespace) })
+            view.run_command('append', { 'characters': '\n'.join(boilerplate) + '\n' })
         elif namespaceStyle == 'psr-2':
-            view.run_command('append', { 'characters': '<?php\n\nnamespace {};\n'.format(namespace) })
+            view.run_command('append', { 'characters': '\n\n'.join(boilerplate) + '\n' })
 
         if settings.get('include_class_definition'):
             view.run_command('append', { 'characters': '\n{} {}\n{{\n}}\n'.format(type, className) })

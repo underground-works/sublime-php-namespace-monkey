@@ -6,5 +6,8 @@
     "namespace_style": "psr-2",
 
     // Include class definition
-    "include_class_definition": true
+    "include_class_definition": true,
+
+    // Include strict types declaration
+    "declare_strict_types": false
 }

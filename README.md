@@ -8,7 +8,23 @@ The namespace monkey pre-fills all created PHP files in a Composer-enabled proje
 
 ![sublime-php-namespace-monkey](https://user-images.githubusercontent.com/821582/56864048-37a87380-69be-11e9-9c94-4e54334ed39f.gif)
 
-Set up the namespace declaration style and turn the class definitions on and off in the package settings.
+Available settings:
+
+```python
+{
+    // Namespace style
+    // - same-line - Same line as PHP tag
+    // - next-line - Next line after PHP tag
+    // - psr-2 - One blank line after PHP tag (PSR-2)
+    "namespace_style": "psr-2",
+
+    // Include class definition
+    "include_class_definition": true,
+
+    // Include strict types declaration
+    "declare_strict_types": false
+}
+```
 
 ### Licence
 
